@@ -21,5 +21,6 @@ IMAGE_INSTALL = "\
 		bridge-utils \
 		dataprov-uapp \
 		dataprov-mod \
+		hvhk-mod \
 		"
 EXTRA_USERS_PARAMS = "usermod -P root root;"

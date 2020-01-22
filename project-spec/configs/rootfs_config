@@ -4138,6 +4138,7 @@ CONFIG_dataprov-uapp=y
 # modules 
 #
 CONFIG_dataprov-mod=y
+CONFIG_hvhk-mod=y
 
 #
 # user packages 
