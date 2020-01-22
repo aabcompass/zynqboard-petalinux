@@ -22,5 +22,6 @@ IMAGE_INSTALL = "\
 		dataprov-uapp \
 		dataprov-mod \
 		hvhk-mod \
+		spaciroc-mod \
 		"
 EXTRA_USERS_PARAMS = "usermod -P root root;"

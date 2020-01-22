@@ -4139,6 +4139,7 @@ CONFIG_dataprov-uapp=y
 #
 CONFIG_dataprov-mod=y
 CONFIG_hvhk-mod=y
+CONFIG_spaciroc-mod=y
 
 #
 # user packages 
