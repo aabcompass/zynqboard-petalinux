@@ -19,9 +19,12 @@ IMAGE_INSTALL = "\
 		packagegroup-core-ssh-dropbear \
 		tcf-agent \
 		bridge-utils \
+		artix-load-uapp \
 		dataprov-uapp \
+		scurve-adder-uapp \
 		dataprov-mod \
 		hvhk-mod \
+		scurve-adder-mod \
 		spaciroc-mod \
 		"
 EXTRA_USERS_PARAMS = "usermod -P root root;"

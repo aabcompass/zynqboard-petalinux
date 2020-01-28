@@ -34,7 +34,7 @@
 #define CONFIG_MII
 #define CONFIG_NET_MULTI
 #define CONFIG_NETCONSOLE	1
-#define CONFIG_SERVERIP	192.168.0.111
+#define CONFIG_SERVERIP	192.168.7.2
 #define CONFIG_IPADDR
 
 /* sdio - ps7_sd_0 */
