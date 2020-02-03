@@ -28,6 +28,7 @@
 *******************************************************************************/
 #define REGW_SCURVE_ADDER_FLAGS		0
 #define REGW_SCURVE_ADDER_ADDS		4
+#define REGW_SCURVE_ADDER_TEST_MODE	6
 
 /******************************************************************************
 *	Internal structures
@@ -180,40 +181,7 @@ static void cdevFileClose(void)
 	fd_cdev = -1;
 }
 
-/********************************** dpTest() **********************************
-* Perform DATA-PROVIDER register read/write test
-* Character device must be opened before calling this function
-* Used variable:
-*	(i)fd_cdev - file descriptor of the character device
-*******************************************************************************/
-//static void dpTest(void)
-//{
-//	uint32_t val;
-//	uint32_t regw;
-//
-//	// Set register number for "read register" operation
-//	regw = 5;
-//
-//	printf("Reading register %d... \n",regw);
-//	if(cdevFileRegRd(regw,&val) < 0){
-//		printf("Error: Can not read register value\n");
-//		return;
-//	}
-//	printf("Received value = %d \n", val);
-//
-//	// Set register number for "write register" operation, set the value to write
-//	regw = 7;
-//	val = 777;
-//
-//	printf("Writing new value==%d to the register %d... \n",val,regw);
-//	if(cdevFileRegWr(regw,val) < 0) {
-//		printf("Error: Can not write register value\n");
-//		return;
-//	}
-//	printf("The value was written successfully! \n");
-//
-//	printf("Test success! \n");
-//}
+
 
 static void saCmdInit()
 {
@@ -233,6 +201,15 @@ static void saCmdSetNAcc(uint32_t param)
    	saCmdInit();
 }
 
+static void saCmdSetTestMode(uint32_t param)
+{
+	cdevFileRegWr(REGW_SCURVE_ADDER_FLAGS, 0x0);
+	cdevFileRegWr(REGW_SCURVE_ADDER_TEST_MODE, param);
+	printf("Set TEST_MODE to %d\n", param);
+	saCmdInit();
+}
+
+
 
 
 int
@@ -248,11 +225,12 @@ sub_getopt (int argc, char **argv) {
         static struct option long_options[] = {
            // {"init", 0, 0, 'i'},
             {"adds", 1, 0, 'a'},
+            {"test", 1, 0, 't'},
             {"help", 0, 0, 'h'},
              {0, 0, 0, 0}
         };
 
-        c = getopt_long (argc, argv, "a:h",
+        c = getopt_long (argc, argv, "a:t:h",
                  long_options, &option_index);
         if (c == -1)
             break;
@@ -264,17 +242,9 @@ sub_getopt (int argc, char **argv) {
                 printf (" with arg. %s", optarg);
             printf ("\n");
             break;
-//
-//        case 'i':
-//        	saCmdInit();
-//        	break;
 
         case 'a':
-            //printf ("Parameter frames (f): `%s'\n", optarg);
-           // printf("optarg = %s\n", optarg);
             ret = sscanf(optarg, "%d ",  &adds_int);
-            //printf("sprintf returned %d\n", ret);
-            //printf("frames_int = %d\n", frames_int);
             if(adds_int > 0)
             {
             	saCmdSetNAcc(adds_int);
@@ -285,6 +255,18 @@ sub_getopt (int argc, char **argv) {
             }
             break;
 
+        case 't':
+            ret = sscanf(optarg, "%d ",  &adds_int);
+            if(adds_int == 0 || adds_int == 1)
+            {
+            	saCmdSetTestMode(adds_int);
+            }
+            else
+            {
+            	printf("Parameter must be 1 or 0\n");
+            }
+            break;
+
 
         case 'h':
         	dpCmdPrintHelp();
@@ -292,13 +274,11 @@ sub_getopt (int argc, char **argv) {
 
 
         default:
-            //printf ("?? getopt возвратило код символа 0%o ??\n", c);
         	printf ("BAD OPTION\n", c);
         }
     }
 
     if (optind < argc) {
-        //printf ("элементы ARGV, не параметры: ");
     	printf ("No such params: ");
         while (optind < argc)
             printf ("%s ", argv[optind++]);
@@ -322,6 +302,10 @@ static void dpCmdPrintHelp()
 
     printf("\t -a, --adds=[1..65535]\n");
     printf("\t\t Set number of additions and start.\n");
+    printf("\n");
+
+    printf("\t -t, --test=[0|1]\n");
+    printf("\t\t Set test mode. \n");
     printf("\n");
 
     printf("\t -h, --help\n");
