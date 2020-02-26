@@ -21,6 +21,7 @@ IMAGE_INSTALL = "\
 		bridge-utils \
 		artix-load-uapp \
 		dataprov-uapp \
+		init-uapp \
 		scurve-adder-uapp \
 		dataprov-mod \
 		hvhk-mod \
