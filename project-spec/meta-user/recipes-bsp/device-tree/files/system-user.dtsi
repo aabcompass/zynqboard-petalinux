@@ -1,5 +1,13 @@
 /include/ "system-conf.dtsi"
 / {
+	// Andrey Poroshin added pseudo device for DMA access
+	dma_proxy {
+		compatible ="por,dma-proxy-pseudo-dev";
+		dmas = <&axi_dma_0 0
+				&axi_dma_sc36 0>;
+
+		dma-names = "axi_dma_0", "axi_dma_sc36";
+	};
 	
 };
 

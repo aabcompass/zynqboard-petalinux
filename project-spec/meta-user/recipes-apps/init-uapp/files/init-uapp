@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "Hello PetaLinux World"
+artix-load-uapp
+artix-load-uapp
+artix-load-uapp

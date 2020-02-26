@@ -4132,6 +4132,7 @@ CONFIG_bridge-utils=y
 #
 CONFIG_artix-load-uapp=y
 CONFIG_dataprov-uapp=y
+CONFIG_dma-uapp=y
 # CONFIG_gpio-demo is not set
 CONFIG_init-uapp=y
 # CONFIG_peekpoke is not set
@@ -4141,6 +4142,7 @@ CONFIG_scurve-adder-uapp=y
 # modules 
 #
 CONFIG_dataprov-mod=y
+CONFIG_dma-mod=y
 CONFIG_hvhk-mod=y
 CONFIG_scurve-adder-mod=y
 CONFIG_spaciroc-mod=y
