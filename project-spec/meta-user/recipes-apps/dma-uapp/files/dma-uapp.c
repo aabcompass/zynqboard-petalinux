@@ -110,13 +110,13 @@ int main(int argc, char *argv[])
 	printf("dma-uapp: Starting Threads \n");
 
 	// Start threads cycle: one thread for one DMA channel
-	for(thr_idx = 0; thr_idx < _DM_CH_NUM; thr_idx++)
+	for(thr_idx = 1; thr_idx < _DM_CH_NUM; thr_idx++)
 		thrStart(thr_idx);					// Start data receive/store thread
 
 	printf("dma-uapp: Threads were started \n");
 
 	// Wait until all threads are finished
-	for(thr_idx = 0; thr_idx < _DM_CH_NUM; thr_idx++)
+	for(thr_idx = 1; thr_idx < _DM_CH_NUM; thr_idx++)
 		thrWaitFin(thr_idx);				// Block, wait until the thread is finished
 
 	
@@ -515,10 +515,11 @@ static void chRcMemUnmap(CHRC_PARAMS_t *params)
 *******************************************************************************/
 static int chRcDataCycle(CHRC_PARAMS_t *params)
 {
-	int rc;
+	int rc, i;
 
 	// DMA receive infinite cycle
-	while(1){
+	//while(1)
+	for(i=0;i<1;i++) {
 		// Clear kernel buffer before data receiving
 		chRcDataClrBuf(params);
 
